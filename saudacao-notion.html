@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saudação</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+    padding: 16px 20px;
+  }
+
+  .greeting-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .icon {
+    font-size: 36px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .greeting {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.3px;
+  }
+
+  .datetime {
+    font-size: 13px;
+    color: #888;
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+
+<div class="greeting-wrap">
+  <div class="icon" id="icon"></div>
+  <div class="text-block">
+    <div class="greeting" id="greeting"></div>
+    <div class="datetime" id="datetime"></div>
+  </div>
+</div>
+
+<script>
+  const dias = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+
+  function atualizar() {
+    const agora = new Date();
+    const hora = agora.getHours();
+    const diaSemana = dias[agora.getDay()];
+    const diaNum = agora.getDate();
+    const mes = meses[agora.getMonth()];
+    const ano = agora.getFullYear();
+
+    let icone, saudacao;
+
+    if (hora >= 5 && hora < 12) {
+      icone = '🌅';
+      saudacao = 'Bom dia!';
+    } else if (hora >= 12 && hora < 18) {
+      icone = '☀️';
+      saudacao = 'Boa tarde!';
+    } else if (hora >= 18 && hora < 22) {
+      icone = '🌇';
+      saudacao = 'Boa noite!';
+    } else {
+      icone = '🌙';
+      saudacao = 'Boa noite!';
+    }
+
+    document.getElementById('icon').textContent = icone;
+    document.getElementById('greeting').textContent = saudacao;
+    document.getElementById('datetime').textContent = `${diaSemana}, ${diaNum} de ${mes} de ${ano}`;
+  }
+
+  atualizar();
+  setInterval(atualizar, 60000);
+</script>
+
+</body>
+</html>
